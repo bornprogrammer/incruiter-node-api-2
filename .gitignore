@@ -1,3 +1,5 @@
 node_modules/
 .env
 .DS_Store
+access.log
+incruiter.code-workspace
