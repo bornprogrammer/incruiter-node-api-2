@@ -3,7 +3,6 @@ import { responseHelperIns } from "../../infrastructure/helpers/ResponseHelper.j
 
 export default class BaseController {
   constructor() {
-
   }
 
   invoke(ctrlCallable) {
@@ -12,7 +11,7 @@ export default class BaseController {
         const result = await ctrlCallable(req, res);
         responseHelperIns.sendSuccessResponse(req, res, result);
       } catch (error) {
-        responseHelperIns.sendSuccessResponse(req, res, error);
+        responseHelperIns.sendErrorResponse(req, res, error);
       }
     };
   }

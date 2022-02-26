@@ -3,6 +3,10 @@ import BaseController from "./BaseController.js";
 
 import authServiceIns from "./../services/AuthService.js";
 
+import { signUpSchema, loginSchema } from "./../joi-validation-schemas/authValidatonSchema.js";
+
+import joiValidationHelper from "../../infrastructure/helpers/joiValidationHelper.js";
+
 class AuthController extends BaseController {
 
   constructor() {
@@ -10,8 +14,8 @@ class AuthController extends BaseController {
   }
 
   async signUp(req, res) {
-    console.log('sign up');
-    let result = await authServiceIns.signUp(req.body);
+    let validatedValue = joiValidationHelper(signUpSchema, req.body);
+    let result = await authServiceIns.signUp(validatedValue);
     return result;
   }
 }

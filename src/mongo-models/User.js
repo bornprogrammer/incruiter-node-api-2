@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-// const Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-const UserSchema = new mongoose.Schema({
+const userSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -25,10 +25,14 @@ const UserSchema = new mongoose.Schema({
     enum: ['incruiter', 'google', 'linkedin'],
     required: true,
   },
+  scope: {
+    type: String,
+    required: true
+  }
 },
   {
     timestamps: true
   }
 );
 
-export default mongoose.model('User', UserSchema);
+export default mongoose.model('User', userSchema);
