@@ -4,17 +4,16 @@ import config from "config";
 
 import morgan from "morgan";
 
-import fs from 'fs';
+import fs from "fs";
 
-import path from 'path';
+import path from "path";
 
-import { appRoutes } from './src/routes/index.js';
+import { createLogger, transports } from "winston";
 
-import { createLogger, transports } from 'winston';
+import cors from "cors";
 
-import cors from 'cors';
-
-import bodyParser from 'body-parser';
+import bodyParser from "body-parser";
+import appRoutes from "./src/routes/index.js";
 
 import { mongooseConnect } from "./src/database/mongooseConnect.js";
 
@@ -22,8 +21,8 @@ const app = express();
 
 const logger = createLogger({
   transports: [
-    new transports.Console()
-  ]
+    new transports.Console(),
+  ],
 });
 
 // const __dirname = path.resolve();
@@ -33,10 +32,11 @@ const logger = createLogger({
 app.use(cors());
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/api", appRoutes());
 
-app.listen(config.get("PORT"), () => {
+app.listen(config.get("port"), () => {
   mongooseConnect();
   logger.info("Server started at ")
   // console.log("server started attt", config.get("PORT"));

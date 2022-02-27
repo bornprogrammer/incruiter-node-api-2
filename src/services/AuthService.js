@@ -1,9 +1,8 @@
 import BaseService from "./BaseService.js";
 
-import User from "./../mongo-models/User.js";
+import User from "./../mongo-schemas/User.js";
 
 class AuthService extends BaseService {
-
   constructor() {
     super();
   }

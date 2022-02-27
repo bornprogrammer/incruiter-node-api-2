@@ -1,12 +1,9 @@
-
-import HttpResponseStatus from "../../infrastructure/constants/HttpResponseStatus.js";
-import HttpMethod from "../../infrastructure/constants/HttpMethod.js";
 import mongoose from "mongoose";
+import { InvalidRequestError } from "oauth2-server";
+import HttpResponseStatus from "../constants/HttpResponseStatus.js";
+import HttpMethod from "../constants/HttpMethod.js";
 
 class ResponseHelper {
-
-  constructor() {
-  }
 
   sendSuccessResponse(req, res, result) {
     let httpStatus = HttpResponseStatus.RESOURCES_FOUND;
@@ -35,10 +32,22 @@ class ResponseHelper {
 
   sendErrorResponse(req, res, error) {
     if (this.isMongooseError(error)) {
+      // db error
       this.sendResponse(res, 500, this.buildResponseSchema(null, error.message));
     } else if (this.isHttpResponseError(error)) {
+      //
       this.sendResponse(res, error.code, this.buildResponseSchema(null, error.message));
+    } else if (this.isOAuthServerError(error)) {
+      // oauth2-server error
+      this.sendResponse(res, error.code, this.buildResponseSchema(null, error.message));
+    } else {
+      // 500 internal server error
+      this.sendResponse(res, 500, this.buildResponseSchema(null, error.message));
     }
+  }
+
+  isOAuthServerError(error) {
+    return error instanceof InvalidRequestError;
   }
 
   isMongooseError(error) {
@@ -50,8 +59,8 @@ class ResponseHelper {
   }
 
   buildResponseSchema(result, message) {
-    return { result, message: message || '' };
+    return { result, message: message || "" };
   }
 }
 
-export const responseHelperIns = new ResponseHelper();
+export default new ResponseHelper();

@@ -1,4 +1,6 @@
 {
-  "PORT": "PORT",
-  "MONGO_URI": "MONGO_URI"
+  "port": "PORT",
+  "mongo_uri": "MONGO_URI",
+  "jwt_access_token_secret": "JWT_ACCESS_TOKEN_SECRET",
+  "jwt_refresh_token_secret": "JWT_REFRESH_TOKEN_SECRET"
 }

@@ -1,9 +1,6 @@
-
-import { responseHelperIns } from "../../infrastructure/helpers/ResponseHelper.js";
+import responseHelperIns from "../../infrastructure/helpers/ResponseHelper.js";
 
 export default class BaseController {
-  constructor() {
-  }
 
   invoke(ctrlCallable) {
     return async (req, res) => {
@@ -11,6 +8,7 @@ export default class BaseController {
         const result = await ctrlCallable(req, res);
         responseHelperIns.sendSuccessResponse(req, res, result);
       } catch (error) {
+        console.log("invoked-error", error);
         responseHelperIns.sendErrorResponse(req, res, error);
       }
     };

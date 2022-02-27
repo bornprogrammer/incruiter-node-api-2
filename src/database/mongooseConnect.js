@@ -3,7 +3,7 @@ import config from "config";
 
 export const mongooseConnect = () => {
 
-  mongoose.connect(config.get("MONGO_URI"), {
+  mongoose.connect(config.get("mongo_uri"), {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });

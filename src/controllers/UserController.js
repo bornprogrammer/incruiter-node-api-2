@@ -1,15 +1,12 @@
-
 import BaseController from "./BaseController.js";
+import userServiceIns from "../services/UserService.js";
 
 class UserController extends BaseController {
-
-  constructor() {
-    super();
-  }
+  userService = userServiceIns;
 
   async getUser(req, res) {
-    return { day: "not happy today" };
+    this.userService.getUser();
   }
 }
 
-export const userControllerIns = new UserController();
+export default new UserController();

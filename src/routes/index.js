@@ -1,10 +1,10 @@
 import express from "express";
 
-import { authRoutesIns } from "./authRoutes.js";
+import authRoutesIns from "./AuthRoutes.js";
 
-import { userRoutesIns } from "./userRoutes.js";
+import userRoutesIns from "./UserRoutes.js";
 
-export const appRoutes = () => {
+export default () => {
   const router = express.Router();
   router.use("/v1/auth", authRoutesIns.setRoutes());
   router.use("/v1/users", userRoutesIns.setRoutes());

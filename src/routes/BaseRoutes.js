@@ -2,6 +2,7 @@ import express from "express";
 
 export default class BaseRoutes {
   router;
+
   constructor() {
     this.router = express.Router();
   }
