@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const oAuthRefreshTokenSchema = new Schema({
   refreshToken: String,
@@ -8,14 +8,14 @@ const oAuthRefreshTokenSchema = new Schema({
   scope: String,
   User: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: "User",
   },
   OAuthClient: {
     type: Schema.Types.ObjectId,
-    ref: 'OAuthClient'
+    ref: "OAuthClient",
   },
 }, {
-  timestamps: true
+  timestamps: true,
 });
 
 export default mongoose.model("OAuthRefreshToken", oAuthRefreshTokenSchema);

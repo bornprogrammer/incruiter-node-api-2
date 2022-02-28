@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const oAuthAccessTokenSchema = new Schema({
   accessToken: {
     type: String,
-    required: true
+    required: true,
   },
   expires: {
     type: Date,
@@ -16,14 +16,14 @@ const oAuthAccessTokenSchema = new Schema({
   },
   User: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: "User",
   },
   OAuthClient: {
     type: Schema.Types.ObjectId,
-    ref: 'OAuthClient'
+    ref: "OAuthClient",
   },
 }, {
-  timestamps: true
+  timestamps: true,
 });
 
-export default mongoose.model('OAuthAccessToken', oAuthAccessTokenSchema);
+export default mongoose.model("OAuthAccessToken", oAuthAccessTokenSchema);

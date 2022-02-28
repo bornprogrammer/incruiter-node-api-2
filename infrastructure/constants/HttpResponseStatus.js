@@ -16,4 +16,6 @@ export default class HttpResponseStatus {
   static FORBIDDEN = 403;
 
   static INTERNAL_SERVER_ERROR = 500;
+
+  static CONFLICT = 409;
 }

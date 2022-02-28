@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const oAuthClientSchema = new Schema({
   name: String,
@@ -9,9 +9,9 @@ const oAuthClientSchema = new Schema({
   redirectUri: String,
   grantTypes: String,
   scope: String,
-  User: { type: Schema.Types.ObjectId, ref: 'User' },
+  User: { type: Schema.Types.ObjectId, ref: "User" },
 }, {
-  timestamps: true
+  timestamps: true,
 });
 
-export default mongoose.model('OAuthClient', oAuthClientSchema);
+export default mongoose.model("OAuthClient", oAuthClientSchema);

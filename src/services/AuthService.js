@@ -1,15 +1,18 @@
 import BaseService from "./BaseService.js";
 
-import User from "./../mongo-schemas/User.js";
+import User from "../mongo-schemas/User.js";
+
+import EmailAlreadyExists from "../../infrastructure/errors/EmailAlreadyExists.js";
 
 class AuthService extends BaseService {
-  constructor() {
-    super();
-  }
 
   async signUp(userData) {
-    let userDetails = await User(userData).save();
-    return userDetails;
+    const userDetails = await User.findOne({ email: userData.email });
+    if (userDetails) {
+      throw new EmailAlreadyExists();
+    }
+    const userCreated = await User(userData).save();
+    return userCreated;
   }
 }
 

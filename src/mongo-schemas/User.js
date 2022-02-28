@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const userSchema = new Schema({
   name: {
@@ -17,26 +18,26 @@ const userSchema = new Schema({
   },
   userType: {
     type: String,
-    enum: ['employer', 'interviewer', 'recruiter'],
+    enum: ["employer", "interviewer", "recruiter"],
     required: true,
   },
   signupType: {
     type: String,
-    enum: ['incruiter', 'google', 'linkedin'],
+    enum: ["incruiter", "google", "linkedin"],
     required: true,
   },
   scope: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 },
   {
-    timestamps: true
-  }
+    timestamps: true,
+  },
 );
 
-userSchema.pre('save', async function (next) {
-  let context = this;
+userSchema.pre("save", async function (next) {
+  const context = this;
   if (context.password) {
     const salt = await bcrypt.genSalt(10);
     context.password = await bcrypt.hash(context.password, salt);
@@ -44,4 +45,4 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model("User", userSchema);

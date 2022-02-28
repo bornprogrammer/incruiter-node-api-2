@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const oAuthScopeSchema = new Schema({
   scope: String,
-  isDefault: Boolean
+  isDefault: Boolean,
 }, {
-  timestamps: true
+  timestamps: true,
 });
 
-export default mongoose.model('OAuthScope', oAuthScopeSchema);
+export default mongoose.model("OAuthScope", oAuthScopeSchema);
